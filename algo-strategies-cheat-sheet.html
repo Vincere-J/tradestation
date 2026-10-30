@@ -1,0 +1,140 @@
+<meta charset="utf-8">
+<title>Algo Strategies Cheat Sheet 9.0</title>
+<style>
+  @page { size: 341mm 312mm; margin:0; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root{
+    --bg:#0a0f1e; --panel:#0f1526; --panel2:#121a2e; --line:#1e2942;
+    --txt:#e6ecf7; --mut:#8a97b3; --dim:#5a688a;
+    --orb:#3b82f6; --sqz:#8b5cf6; --trd:#10b981; --amber:#f59e0b;
+  }
+  html,body{ background:var(--bg); color:var(--txt);
+    font-family:"Segoe UI",Arial,sans-serif; }
+  .page{ width:1233px; padding:22px 26px 26px; }
+  /* header */
+  .hdr{ display:flex; align-items:center; gap:16px; padding:6px 4px 16px;
+    border-bottom:1px solid var(--line); }
+  .brand{ font-weight:800; font-size:26px; letter-spacing:.5px; }
+  .brand .sub{ color:#4a5675; font-weight:600; margin-left:10px; letter-spacing:2px; }
+  .legend{ margin-left:auto; display:flex; gap:22px; font-size:13px; color:var(--mut); }
+  .dot{ display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .d-orb{ background:var(--orb);} .d-sqz{ background:var(--sqz);} .d-trd{ background:var(--trd);}
+  /* strategy defs */
+  .defs{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; padding:16px 4px 20px; }
+  .defs h4{ font-size:12px; letter-spacing:1.5px; margin-bottom:7px; }
+  .defs p{ font-size:12.5px; line-height:1.5; color:var(--mut); }
+  .c-orb{ color:var(--orb);} .c-sqz{ color:var(--sqz);} .c-trd{ color:var(--trd);}
+  /* body grid */
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  .panel{ background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px 18px; }
+  .ptitle{ font-size:12.5px; letter-spacing:1.5px; color:#9fb0d6; margin-bottom:12px; }
+  /* orb table */
+  table{ width:100%; border-collapse:collapse; }
+  thead th{ text-align:left; font-size:10.5px; letter-spacing:1px; color:var(--dim);
+    padding:0 8px 10px; font-weight:700; }
+  tbody td{ padding:11px 8px; border-top:1px solid var(--line); vertical-align:top; font-size:12.5px; }
+  .algo{ font-weight:800; font-size:16px; }
+  .inst{ color:var(--orb); font-weight:700; font-size:12px; }
+  .note{ color:var(--mut); font-size:11.5px; line-height:1.45; }
+  /* other-algo cards */
+  .card{ background:var(--panel2); border:1px solid var(--line); border-radius:9px;
+    padding:13px 15px 14px; margin-bottom:12px; position:relative; overflow:hidden; }
+  .card:last-child{ margin-bottom:0; }
+  .card::before{ content:""; position:absolute; top:0; left:0; right:0; height:3px; }
+  .card.orb::before{ background:var(--orb);} .card.sqz::before{ background:var(--sqz);}
+  .card.trd::before{ background:var(--trd);}
+  .crow{ display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+  .cname{ font-weight:800; font-size:19px; }
+  .badge{ font-size:10.5px; font-weight:700; padding:3px 9px; border-radius:5px; letter-spacing:.3px; }
+  .b-sqz{ background:rgba(139,92,246,.16); color:#b79dff; }
+  .b-trd{ background:rgba(16,185,129,.16); color:#5be2b2; }
+  .new{ margin-left:6px; font-size:9.5px; font-weight:800; letter-spacing:1px;
+    background:var(--sqz); color:#fff; padding:2px 7px; border-radius:4px; }
+  .chips{ display:flex; gap:8px; margin-bottom:9px; }
+  .chip{ font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px;
+    background:rgba(255,255,255,.05); border:1px solid var(--line); color:#c3cee6; }
+  .chip.i{ color:var(--sqz); }
+  .cdesc{ font-size:11.5px; line-height:1.5; color:var(--mut); }
+  /* footer */
+  .foot{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; margin-top:22px;
+    padding-top:16px; border-top:1px solid var(--line); }
+  .foot h5{ font-size:11px; letter-spacing:1.2px; color:#9fb0d6; margin-bottom:6px; }
+  .foot p{ font-size:11px; line-height:1.5; color:#6b7796; }
+  .foot .a-orb{border-top:2px solid var(--orb);}
+  .fbar{ height:2px; margin-bottom:10px; }
+  .stamp{ text-align:right; font-size:10px; color:#4a5675; margin-top:14px; letter-spacing:.5px; }
+</style>
+
+<div class="page">
+
+  <div class="hdr">
+    <div class="brand">VINCERE TRADING<span class="sub">ALGO STRATEGY REFERENCE 9.0</span></div>
+    <div class="legend">
+      <span><span class="dot d-orb"></span>ORB</span>
+      <span><span class="dot d-sqz"></span>Squeeze</span>
+      <span><span class="dot d-trd"></span>Trend</span>
+    </div>
+  </div>
+
+  <div class="defs">
+    <div><h4 class="c-orb">ORB</h4><p>An opening window sets the high/low range (OGX 9:35 to 9:55, RBO 9:10 to 10:00). Trade fires when price breaks out above or below the range.</p></div>
+    <div><h4 class="c-sqz">SQUEEZE</h4><p>Identifies tight consolidation periods where price is coiling. Enters on the directional breakout when energy releases.</p></div>
+    <div><h4 class="c-trd">TREND</h4><p>Catches sustained upside moves from late morning into the afternoon when momentum turns bullish. Long only, infrequent.</p></div>
+    <div><h4 style="color:#9fb0d6">9.0 SCHEDULES</h4><p>All times ET. Every algo flattens at 3:30. FOMC statement days, holidays and shortened sessions are blocked by default.</p></div>
+  </div>
+
+  <div class="grid">
+
+    <!-- LEFT: ORB table -->
+    <div class="panel">
+      <div class="ptitle">OPENING RANGE BREAKOUT ALGOS</div>
+      <table>
+        <thead><tr><th>ALGO</th><th>INST</th><th>TF</th><th>DIR</th><th>NOTES</th></tr></thead>
+        <tbody>
+          <tr><td class="algo">OGX</td><td class="inst">MNQ</td><td>5 min</td><td>L &amp; S</td><td class="note">Core ORB on Micro NASDAQ. Range 9:35 to 9:55. Most actively traded algo in the suite. PF version: OGX PF.<br>9.0: 9:35 to 1:50, Mon off. No shorts 12:00 to 1:00. Max 3 entries a day. Edge Leverage on. No re-entry.</td></tr>
+          <tr><td class="algo">RBO</td><td class="inst">M2K</td><td>10 min</td><td>L &amp; S</td><td class="note">ORB on Micro Russell 2000. Small-cap, tends to diverge from NQ/ES in choppy markets. PF version: RBO PF.<br>9.0: 9:35 to 11:00, trades every weekday. No new shorts after 10:25. Max 2 entries a day. No Edge Leverage, no re-entry.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RIGHT: other-strategy cards -->
+    <div class="panel">
+      <div class="ptitle">OTHER STRATEGY ALGOS</div>
+
+      <div class="card sqz">
+        <div class="crow"><span class="cname">B2X</span><span class="badge b-sqz">Squeeze</span></div>
+        <div class="chips"><span class="chip i">M2K</span><span class="chip">10 min</span><span class="chip">L &amp; S</span></div>
+        <div class="cdesc">Squeeze on Micro Russell. 3 scaled TPs: 125 / 150 / 200 ticks. SL: 100 ticks. Trail fires at 126 ticks, moves 70.<br>9.0: 10:00 to 11:50, Mon off. No new longs after 10:20, no new shorts after 11:20. Max 2 entries a day.</div>
+      </div>
+
+      <div class="card sqz">
+        <div class="crow"><span class="cname">URGO</span><span class="badge b-sqz">Squeeze</span></div>
+        <div class="chips"><span class="chip i">MNQ</span><span class="chip">15 min</span><span class="chip">L &amp; S</span></div>
+        <div class="cdesc">Squeeze on Micro NASDAQ, wider 15-min bars. TPs: 400 / 450 / 500 ticks. SL: 300 ticks. Trail at 300. Bigger moves, smaller size than B2X.<br>9.0: 9:30 to 2:00, trades every weekday. Skips 11:30 to 12:00, no shorts 12:00 to 1:00. Max 1 entry a day.</div>
+      </div>
+
+      <div class="card sqz">
+        <div class="crow"><span class="cname">G4M</span><span class="badge b-sqz">Squeeze</span><span class="new">NEW</span></div>
+        <div class="chips"><span class="chip i">MES</span><span class="chip">15 min</span><span class="chip">L &amp; S</span></div>
+        <div class="cdesc">Coils on Micro S&amp;P 500 15-min bars and enters on the directional breakout when energy releases. TPs: 80 / 120 / 160 ticks. SL: 80 ticks.<br>9.0: 9:35 to 1:30, Mon and Wed off. No new longs 10:30 to 11:00, no new shorts 11:00 to 11:30. No daily entry cap.</div>
+      </div>
+
+      <div class="card trd">
+        <div class="crow"><span class="cname">MST2</span><span class="badge b-trd">Trend</span></div>
+        <div class="chips"><span class="chip i" style="color:var(--trd)">YM</span><span class="chip">10 min</span><span class="chip">Long only</span></div>
+        <div class="cdesc">Trend on the Dow (MotusTemplar), full size YM at every account size. Buys sustained moves from late morning into the afternoon when momentum turns bullish. Fires only a few days a week. TPs: 85 / 120 / 130 ticks. SL: 65 ticks.<br>9.0: 11:00 to 2:30, Tue and Thu off. Skips 1:00 to 2:00. Re-entry on, after 4 bars.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><div class="fbar" style="background:var(--orb)"></div><h5>PF VERSION</h5><p>If an algo has a PF variant (OGX PF, RBO PF), always use it on prop accounts. B2X, URGO, G4M and MST2 have no PF version - use as-is on prop accounts.</p></div>
+    <div><div class="fbar" style="background:var(--sqz)"></div><h5>9.0 SET FILES</h5><p>No more Low / Medium / High tiers or V1-V5. Each algo has 19 set files with the same exits; they differ only by sizing (fixed $10k to $300k, split balance, full balance).</p></div>
+    <div><div class="fbar" style="background:var(--trd)"></div><h5>CHOP WARNING</h5><p>ORB algos perform best on clean directional opens. False breakouts in choppy sessions are the algo following its rules - not a malfunction.</p></div>
+    <div><div class="fbar" style="background:var(--amber)"></div><h5>CONTRACT ROLLOVER</h5><p>Roll contracts every 3-4 days via Tools &gt; Database Management. Stale contracts = no trades. Restart NT to trigger the rollover prompt.</p></div>
+  </div>
+
+  <div class="stamp">9.0 roster: OGX, OGX PF, RBO, RBO PF, B2X, URGO, G4M, MST2. All times ET. Rev 9.0 10.30.26</div>
+
+</div>

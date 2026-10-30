@@ -1,0 +1,123 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algo Cheat Sheet 9.0</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:#080d1a;color:#e7edf9;
+    font-family:"Segoe UI",Inter,Arial,sans-serif;line-height:1.5;}
+  .wrap{max-width:1000px;margin:0 auto;padding:34px 18px 60px;}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;
+    letter-spacing:3px;font-size:15px;color:#cdd8f0;margin-bottom:18px;}
+  .brand .bull{font-size:22px;}
+  h1{font-size:30px;line-height:1.15;font-weight:800;margin-bottom:8px;}
+  .kicker{font-size:12.5px;letter-spacing:2px;color:#3b82f6;font-weight:700;margin-bottom:12px;}
+  .lede{font-size:14px;color:#93a1c0;background:#0e1526;border:1px solid #1d2942;
+    border-radius:10px;padding:12px 15px;margin-bottom:24px;}
+  .sheet{display:block;width:100%;height:auto;border:1px solid #1d2942;
+    border-radius:12px;background:#0a1120;}
+  .stamp{text-align:right;font-size:11px;color:#64739a;margin-top:16px;letter-spacing:.5px;}
+
+  /* 9.0: the sheet image is rebuilt as HTML inside the same .sheet frame */
+  .sheet{padding:22px 18px 18px;background:radial-gradient(ellipse at top,#0f1a36 0%,#0a1120 60%);}
+  .s-brand{font-size:20px;letter-spacing:3px;color:#dfe6f5;font-weight:600;}
+  .s-title{text-align:center;font-size:clamp(30px,7vw,62px);font-weight:800;letter-spacing:1px;color:#f3f6fd;line-height:1.1;margin:4px 0 8px;}
+  .s-tag{text-align:center;letter-spacing:6px;color:#b9c4dc;font-size:clamp(11px,2.4vw,17px);}
+  .s-tag b{color:#3b6bff;}
+  .s-info{text-align:center;color:#b9c4dc;font-size:14px;margin:10px 0 20px;}
+  .s-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+  .s-card{background:#0b1428;border:1px solid #1f2b47;border-radius:8px;padding:14px;}
+  .s-head{display:flex;gap:16px;align-items:flex-start;}
+  .s-ico{flex:0 0 74px;height:74px;border:1px solid #2a3756;border-radius:8px;display:grid;place-items:center;font-size:34px;color:#f3f6fd;background:#0a1122;}
+  .s-body{flex:1;min-width:0;}
+  .s-name{font-size:28px;color:#f3f6fd;border-bottom:1px solid #26324f;padding-bottom:4px;margin-bottom:8px;}
+  .s-meta{display:grid;grid-template-columns:1.25fr .8fr 1.35fr;gap:6px;font-size:13.5px;color:#dfe6f5;}
+  .s-meta span{display:block;font-size:10px;letter-spacing:.5px;color:#9aa6c2;}
+  .s-days{display:flex;gap:8px;margin:12px 0 8px;}
+  .d{flex:1;text-align:center;padding:7px 0;border-radius:3px;font-size:16px;letter-spacing:.5px;}
+  .d.on{background:linear-gradient(#1c3bd4,#1630b0);color:#fff;}
+  .d.off{background:#131826;color:#6c7590;border:1px solid #232a3c;}
+  .s-rules{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:6px;}
+  .s-rules div{background:#0a1122;border:1px solid #1f2b47;border-radius:4px;padding:4px 6px;font-size:12.5px;color:#dfe6f5;text-align:center;}
+  .s-rules span{display:block;font-size:9.5px;letter-spacing:.5px;color:#9aa6c2;}
+  .s-rules .yes{color:#6f93ff;font-weight:700;}
+  .s-note{font-size:13.5px;color:#c7d0e3;padding-left:16px;position:relative;}
+  .s-note:before{content:"\2022";position:absolute;left:4px;}
+  .s-foot{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:18px;align-items:center;font-size:13.5px;color:#c7d0e3;}
+  .s-key{display:flex;gap:10px;align-items:center;}
+  .s-sw{flex:0 0 44px;height:44px;border-radius:3px;}
+  .s-sw.on{background:linear-gradient(#1c3bd4,#1630b0);}
+  .s-sw.off{background:#131826;border:1px solid #232a3c;}
+  .s-n{color:#6f93ff;}
+  @media (max-width:420px){.s-ico{flex-basis:52px;height:52px;font-size:24px;}.s-name{font-size:22px;}.d{font-size:13px;}}
+</style>
+
+<div class="wrap">
+  <div class="brand"><span class="bull">&#128002;</span> VINCERE TRADING</div>
+  <div class="kicker">MARKET &bull; TIMEFRAME &bull; TRADING DAYS</div>
+  <h1>Algo Cheat Sheet</h1>
+  <div class="lede">All times in EST. In Vincere 9.0 each algo runs one fixed schedule: there are no more V1 to V5 versions or tiers, so the times below apply to every account. Highlighted day = the strategy trades that day; dimmed day = no session.</div>
+  <div class="sheet" role="img" aria-label="Vincere Algo Cheat Sheet 9.0: market, timeframe, session and trading days for all 6 algos">
+    <div class="s-brand">&#128002; VINCERE</div>
+    <div class="s-title">ALGO CHEAT SHEET</div>
+    <div class="s-tag">MARKET <b>&bull;</b> TIMEFRAME <b>&bull;</b> TRADING DAYS</div>
+    <div class="s-info">&#9432; All times in EST. Vincere 9.0: one fixed schedule per algo.</div>
+
+    <div class="s-grid">
+      <div class="s-card"><div class="s-head"><div class="s-ico">&#9678;</div><div class="s-body">
+        <div class="s-name">1. OGX</div>
+        <div class="s-meta"><div><span>MARKET</span>Nasdaq (MNQ)</div><div><span>TIMEFRAME</span>&#9719; 5 Min</div><div><span>SESSION</span>9:35 AM - 1:50 PM</div></div></div></div>
+        <div class="s-days"><div class="d off">MON</div><div class="d on">TUE</div><div class="d on">WED</div><div class="d on">THU</div><div class="d on">FRI</div></div>
+        <div class="s-rules"><div><span>MAX ENTRIES</span>3 a day</div><div><span>RE-ENTRY</span>No</div></div>
+        <div class="s-note">Also OGX PF. No new shorts 12:00 to 1:00 PM</div>
+      </div>
+
+      <div class="s-card"><div class="s-head"><div class="s-ico">&#128202;</div><div class="s-body">
+        <div class="s-name">2. G4M</div>
+        <div class="s-meta"><div><span>MARKET</span>Micro S&amp;P (MES)</div><div><span>TIMEFRAME</span>&#9719; 15 Min</div><div><span>SESSION</span>9:35 AM - 1:30 PM</div></div></div></div>
+        <div class="s-days"><div class="d off">MON</div><div class="d on">TUE</div><div class="d off">WED</div><div class="d on">THU</div><div class="d on">FRI</div></div>
+        <div class="s-rules"><div><span>MAX ENTRIES</span>No cap</div><div><span>RE-ENTRY</span>No</div></div>
+        <div class="s-note">No new longs 10:30 to 11:00, no new shorts 11:00 to 11:30</div>
+      </div>
+
+      <div class="s-card"><div class="s-head"><div class="s-ico">&#128737;</div><div class="s-body">
+        <div class="s-name">3. MST2</div>
+        <div class="s-meta"><div><span>MARKET</span>Dow (YM)</div><div><span>TIMEFRAME</span>&#9719; 10 Min</div><div><span>SESSION</span>11:00 AM - 2:30 PM</div></div></div></div>
+        <div class="s-days"><div class="d on">MON</div><div class="d off">TUE</div><div class="d on">WED</div><div class="d off">THU</div><div class="d on">FRI</div></div>
+        <div class="s-rules"><div><span>MAX ENTRIES</span>No cap</div><div><span>RE-ENTRY</span><b class="yes">Yes, 4 bars</b></div></div>
+        <div class="s-note">Long only. Skips 1:00 to 2:00 PM</div>
+      </div>
+
+      <div class="s-card"><div class="s-head"><div class="s-ico">&#128640;</div><div class="s-body">
+        <div class="s-name">4. URGO</div>
+        <div class="s-meta"><div><span>MARKET</span>Nasdaq (MNQ)</div><div><span>TIMEFRAME</span>&#9719; 15 Min</div><div><span>SESSION</span>9:30 AM - 2:00 PM</div></div></div></div>
+        <div class="s-days"><div class="d on">MON</div><div class="d on">TUE</div><div class="d on">WED</div><div class="d on">THU</div><div class="d on">FRI</div></div>
+        <div class="s-rules"><div><span>MAX ENTRIES</span>1 a day</div><div><span>RE-ENTRY</span>No</div></div>
+        <div class="s-note">Skips 11:30 to 12:00. No new shorts 12:00 to 1:00 PM</div>
+      </div>
+
+      <div class="s-card"><div class="s-head"><div class="s-ico">&#128260;</div><div class="s-body">
+        <div class="s-name">5. RBO</div>
+        <div class="s-meta"><div><span>MARKET</span>Micro Russell (M2K)</div><div><span>TIMEFRAME</span>&#9719; 10 Min</div><div><span>SESSION</span>9:35 AM - 11:00 AM</div></div></div></div>
+        <div class="s-days"><div class="d on">MON</div><div class="d on">TUE</div><div class="d on">WED</div><div class="d on">THU</div><div class="d on">FRI</div></div>
+        <div class="s-rules"><div><span>MAX ENTRIES</span>2 a day</div><div><span>RE-ENTRY</span>No</div></div>
+        <div class="s-note">Also RBO PF. No new shorts after 10:25</div>
+      </div>
+
+      <div class="s-card"><div class="s-head"><div class="s-ico">&#128200;</div><div class="s-body">
+        <div class="s-name">6. B2X</div>
+        <div class="s-meta"><div><span>MARKET</span>Micro Russell (M2K)</div><div><span>TIMEFRAME</span>&#9719; 10 Min</div><div><span>SESSION</span>10:00 AM - 11:50 AM</div></div></div></div>
+        <div class="s-days"><div class="d off">MON</div><div class="d on">TUE</div><div class="d on">WED</div><div class="d on">THU</div><div class="d on">FRI</div></div>
+        <div class="s-rules"><div><span>MAX ENTRIES</span>2 a day</div><div><span>RE-ENTRY</span>No</div></div>
+        <div class="s-note">No new longs after 10:20, no new shorts after 11:20</div>
+      </div>
+    </div>
+
+    <div class="s-foot">
+      <div class="s-key"><div class="s-sw on"></div><div>Highlighted day<br>= strategy trades that day</div></div>
+      <div class="s-key"><div class="s-sw off"></div><div>Dimmed day<br>= no session</div></div>
+      <div><span class="s-n">Note 1.</span> All algos flatten open positions at 3:30 PM.</div>
+      <div><span class="s-n">Note 2.</span> By default no trades on FOMC statement days, exchange holidays and shortened sessions. These are settings the client controls.</div>
+    </div>
+  </div>
+  <div class="stamp">Vincere Trading &bull; Algo Cheat Sheet &bull; Updated for Vincere 9.0 &bull; 10.30.26</div>
+</div>
