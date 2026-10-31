@@ -111,7 +111,7 @@ footer p{border-top:1px solid var(--line);padding-top:16px;margin:0}
 @media (max-width:900px){.jumpbtns{grid-template-columns:repeat(3,1fr)}}
 @media (min-width:700px){.grid .card:last-child:nth-child(odd){grid-column:auto}}
 @media (min-width:960px){.grid{grid-template-columns:repeat(3,1fr)}.grid .card,.grid .card:nth-child(n+4),.grid .card:last-child:nth-child(odd){grid-column:auto}}
-.card h3{margin-bottom:10px}
+.card h3{margin-bottom:10px}.h3full{display:inline-block;margin-left:8px;font-family:var(--ui);font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.02em;white-space:nowrap;vertical-align:2px}
 .card p{margin:12px 0 0;font-size:16px;line-height:1.55}
 .card p > b:first-child{display:block;margin:0 0 2px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--indigo-700)}
 .card p.sub{margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font-size:14px}
@@ -196,7 +196,7 @@ html.lb-open,html.lb-open body{overflow:hidden}
 <p class="tz"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>All times are EST (New York time).</p>
 <!--v4jump--><nav class="jump" aria-label="Jump to the trades"><p class="jump-h">Jump to the trades</p><div class="jumpbtns"><a class="jbtn" href="inside-the-trades-ogx.html"><b>OGX</b><span>Breakout</span></a><a class="jbtn" href="inside-the-trades-urgo.html"><b>URGO</b><span>Squeeze</span></a><a class="jbtn" href="inside-the-trades-b2x.html"><b>B2X</b><span>Squeeze after a push</span></a><a class="jbtn" href="inside-the-trades-mst.html"><b>MST2</b><span>Trend, buys only</span></a><a class="jbtn" href="inside-the-trades-g4m.html"><b>G4M</b><span>Squeeze</span></a><a class="jbtn" href="inside-the-trades-rbo.html"><b>RBO</b><span>Breakout</span></a></div><p class="jump-sub">Each button opens the 3 trades for that algo. A quick summary of each algo is <a href="#algos">just below</a>.</p></nav><!--/v4jump-->
 <h2 id="algos" style="margin-top:30px">The 6 algos</h2><p class="sub">18 backtest trades from 9/21/2026 to 10/22/2026, 3 for each algo, with 2 winners and 1 loser for every algo.</p>
-<div class="grid"><div class="card"><h3><a href="inside-the-trades-ogx.html">OGX</a></h3>
+<div class="grid"><div class="card"><h3><a href="inside-the-trades-ogx.html">OGX</a><span class="h3full">Obadex Gladiator</span></h3>
 <div><span class="pill">Breakout</span><span class="pill">Micro Nasdaq (MNQ)</span></div>
 <p><b>Looks for</b> An opening range breakout. OGX marks the high and low of the 9:35 to 9:55 candles on a 5 minute MNQ chart, then enters the moment price moves through either side (it does not wait for a candle close).</p>
 <p><b>When it trades</b> Entries from 10:00 AM to 1:50 PM ET, Tuesday to Friday (Monday off). No new shorts from 12:00 to 1:00 PM. At most 3 trades a day.</p>

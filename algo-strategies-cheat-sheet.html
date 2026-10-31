@@ -88,6 +88,7 @@
   .card.trd::before{ background:var(--trd);}
   .crow{ display:flex; align-items:center; gap:10px; margin-bottom:7px; flex-wrap:wrap; }
   .cname{ font-weight:800; font-size:19px; }
+  .cfull{ display:inline-block; margin-left:7px; font-size:11.5px; font-weight:600; color:var(--mut); letter-spacing:.2px; white-space:nowrap; vertical-align:1px; }
   .badge{ font-size:10.5px; font-weight:700; padding:3px 9px; border-radius:5px; letter-spacing:.3px; }
   .b-orb{ background:var(--orb-bg); color:var(--orb-t); }
   .b-sqz{ background:var(--sqz-bg); color:var(--sqz-t); }
@@ -106,7 +107,7 @@
     border-radius:5px; padding:2px 8px; }
 
   /* footer */
-  .foot{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; margin-top:20px;
+  .foot{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; margin-top:20px;
     padding-top:16px; border-top:1px solid var(--line); }
   .foot h5{ font-size:11px; letter-spacing:1.2px; color:var(--head); margin-bottom:6px; }
   .foot p{ font-size:11px; line-height:1.5; color:var(--mut); }
@@ -185,7 +186,7 @@
         <div class="crow"><span class="cname">URGO</span><span class="badge b-sqz">Squeeze</span>
           <div class="chips"><span class="chip i">Micro Nasdaq (MNQ)</span><span class="chip">Long &amp; Short</span></div></div>
         <div class="cdesc">Squeeze on Micro NASDAQ. Bigger moves, smaller size than B2X.</div>
-        <dl class="logic"><div><dt>ENTRY</dt><dd>Waits for price to stall in a tight range without picking a direction, then enters on a candle close once its proprietary confluences confirm a direction. The close does not need to break the range.</dd></div><div><dt>EXITS</dt><dd>Profit targets, fixed stop, trailing stop.</dd></div><div><dt>SIZING</dt><dd>Same size every trade. Edge Leverage off.</dd></div></dl>
+        <dl class="logic"><div><dt>ENTRY</dt><dd>Waits for price to stall in a tight range without picking a direction, then enters on a candle close once its proprietary confluences confirm a direction. The close does not need to break the range.</dd></div><div><dt>EXITS</dt><dd>3 profit targets, fixed stop, trailing stop.</dd></div><div><dt>SIZING</dt><dd>Same size every trade. Edge Leverage off.</dd></div></dl>
       </div>
 
       <div class="card sqz">
@@ -203,7 +204,7 @@
         <div class="ptitle"><span class="dot d-orb"></span>OPENING RANGE BREAKOUT ALGOS</div>
         <div class="stack">
       <div class="card orb">
-        <div class="crow"><span class="cname">OGX</span><span class="badge b-orb">ORB</span>
+        <div class="crow"><span class="cname">OGX<span class="cfull">Obadex Gladiator</span></span><span class="badge b-orb">ORB</span>
           <div class="chips"><span class="chip i">Micro Nasdaq (MNQ)</span><span class="chip">Long &amp; Short</span></div></div>
         <div class="cdesc">Core ORB on Micro NASDAQ. Range 9:35 to 9:55 AM. Most actively traded algo in the suite.</div>
         <dl class="logic"><div><dt>ENTRY</dt><dd>Enters the moment price moves through either side of the range. It does not wait for a candle close.</dd></div><div><dt>EXITS</dt><dd>Profit targets, fixed stop, trailing stop.</dd></div><div><dt>SIZING</dt><dd>Edge Leverage on: the next trade after a stop out that day uses more contracts.</dd></div></dl>
@@ -225,7 +226,7 @@
         <div class="crow"><span class="cname">MST2</span><span class="badge b-trd">Trend</span>
           <div class="chips"><span class="chip i">Dow (YM)</span><span class="chip">Long only</span></div></div>
         <div class="cdesc">Trend on the Dow (MotusTemplar), full size YM at every account size. Buys sustained moves when momentum turns bullish.</div>
-        <dl class="logic"><div><dt>ENTRY</dt><dd>Waits for a dip or a pause in an uptrend to run out of steam, then buys at the close of the candle where its proprietary confluences confirm the uptrend is resuming.</dd></div><div><dt>EXITS</dt><dd>Profit taking, fixed stop, trailing stop.</dd></div><div><dt>SIZING</dt><dd>Same size every trade. Edge Leverage off.</dd></div></dl>
+        <dl class="logic"><div><dt>ENTRY</dt><dd>Waits for a dip or a pause in an uptrend to run out of steam, then buys at the close of the candle where its proprietary confluences confirm the uptrend is resuming.</dd></div><div><dt>EXITS</dt><dd>3 profit targets, fixed stop, trailing stop.</dd></div><div><dt>SIZING</dt><dd>Same size every trade. Edge Leverage off.</dd></div></dl>
       </div>
         </div>
       </div>
@@ -237,7 +238,6 @@
     <div><div class="fbar" style="background:var(--sqz)"></div><h5>SCHEDULES</h5><p>Sessions, trading days and daily entry limits for every algo are on the <b>Algo Cheat Sheet</b>.</p></div>
     <div><div class="fbar" style="background:var(--orb)"></div><h5>STOPS AND TARGETS</h5><p>Exact stops, targets and example trades for every algo are in <b>Inside the Trades</b>.</p></div>
     <div><div class="fbar" style="background:var(--trd)"></div><h5>CHOP WARNING</h5><p>ORB algos perform best on clean directional opens. False breakouts in choppy sessions are the algo following its rules, not a malfunction.</p></div>
-    <div><div class="fbar" style="background:var(--amber)"></div><h5>CONTRACT ROLLOVER</h5><p>Roll contracts every 3-4 days via Tools &gt; Database Management. Stale contracts = no trades. Restart NT to trigger the rollover prompt.</p></div>
   </div>
 
   <div class="stamp">Vincere Trading &bull; Algo Strategy Reference &bull; OGX, RBO, B2X, URGO, G4M, MST2 &bull; Rev 10.31.26</div>
