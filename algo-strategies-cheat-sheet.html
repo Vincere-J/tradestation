@@ -70,11 +70,11 @@
 
   /* body grid */
   .grid{ display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:stretch; }
-  .grid > .panel{ display:flex; flex-direction:column; }
-  .grid > .panel .stack{ flex:1; display:flex; flex-direction:column; gap:12px; }
+  .grid > .panel, .col > .panel{ display:flex; flex-direction:column; }
+  .panel .stack{ flex:1; display:flex; flex-direction:column; gap:12px; }
   .stack .card{ margin-bottom:0; flex:1 0 auto; display:flex; flex-direction:column; }
-  .stack .card .sched{ margin-top:auto; }
-  .stack .card .exits{ margin-bottom:10px; }
+  .stack .card .logic{ margin-top:auto; }
+  .stack .card .cdesc{ margin-bottom:10px; }
   .col{ display:flex; flex-direction:column; gap:22px; }
   .panel{ background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px 18px 18px; }
   .ptitle{ display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:700; letter-spacing:1.5px; color:var(--head); margin-bottom:12px; }
@@ -92,25 +92,15 @@
   .b-orb{ background:var(--orb-bg); color:var(--orb-t); }
   .b-sqz{ background:var(--sqz-bg); color:var(--sqz-t); }
   .b-trd{ background:var(--trd-bg); color:var(--trd-t); }
-  .new{ font-size:9.5px; font-weight:800; letter-spacing:1px;
-    background:var(--sqz); color:#fff; padding:2px 7px; border-radius:4px; }
   .chips{ display:flex; gap:6px; margin-left:auto; }
   .chip{ font-size:11px; font-weight:700; padding:3px 9px; border-radius:6px;
     background:var(--chip); border:1px solid var(--line); color:var(--chiptxt); }
   .orb .chip.i{ color:var(--orb-t); } .sqz .chip.i{ color:var(--sqz-t); } .trd .chip.i{ color:var(--trd-t); }
   .cdesc{ font-size:11.5px; line-height:1.5; color:var(--mut); }
-  .sched{ display:flex; align-items:center; gap:12px; margin-top:10px; padding-top:10px;
-    border-top:1px dashed var(--line); flex-wrap:wrap; }
-  .sess{ font-size:15px; font-weight:700; color:var(--txt); white-space:nowrap; }
-  .sess span{ display:block; font-size:9.5px; letter-spacing:1px; color:var(--dim); font-weight:700; margin-bottom:1px; }
-  .days{ display:flex; gap:4px; margin-left:auto; }
-  .days i{ font-style:normal; font-size:10px; font-weight:700; letter-spacing:.4px; width:36px; text-align:center;
-    padding:4px 0; border-radius:4px; color:#fff; }
-  .orb .days i{ background:var(--orb); } .sqz .days i{ background:var(--sqz); } .trd .days i{ background:var(--trd); }
-  .days i.off{ background:var(--off) !important; color:var(--offtxt); border:1px solid var(--offline); padding:3px 0; }
-  .exits{ display:flex; flex-wrap:wrap; gap:4px 16px; margin-top:8px; font-size:11.5px; color:var(--txt); }
-  .exits span{ white-space:nowrap; }
-  .exits em{ font-style:normal; font-size:9.5px; font-weight:700; letter-spacing:1px; color:var(--dim); margin-right:5px; }
+  .logic{ display:grid; gap:7px; margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); }
+  .logic > div{ display:grid; grid-template-columns:52px 1fr; gap:10px; align-items:baseline; }
+  .logic dt{ font-size:9.5px; font-weight:800; letter-spacing:1px; color:var(--dim); }
+  .logic dd{ font-size:11.5px; line-height:1.5; color:var(--txt); }
   .rules{ list-style:none; display:flex; flex-wrap:wrap; gap:5px 6px; margin-top:8px; }
   .rules li{ font-size:11px; color:var(--chiptxt); background:var(--chip); border:1px solid var(--line);
     border-radius:5px; padding:2px 8px; }
@@ -132,19 +122,18 @@
     .hrow{ flex-wrap:wrap; }
     .defs{ grid-template-columns:1fr; gap:12px; }
     .grid{ grid-template-columns:1fr; }
-    .stack .card .exits{ margin-bottom:0; }
-    .stack .card .sched{ margin-top:10px; }
     .foot{ grid-template-columns:1fr 1fr; gap:18px; }
     .stamp{ text-align:left; }
   }
+  @media screen and (max-width:900px){ .stack .card .cdesc{ margin-bottom:0; } .stack .card .logic{ margin-top:10px; } }
   @media screen and (max-width:520px){
     .brand{ font-size:21px; }
     .legend{ gap:14px; font-size:12px; }
     .panel{ padding:14px 12px 14px; }
     .card{ padding:12px 12px 12px; }
     .chips{ margin-left:0; width:100%; }
-    .days{ margin-left:0; width:100%; }
-    .days i{ flex:1; width:auto; }
+    .logic{ gap:9px; }
+    .logic > div{ grid-template-columns:1fr; gap:2px; }
     .foot{ grid-template-columns:1fr; }
     .toggle{ min-height:36px; padding:6px 16px; }
   }
@@ -167,7 +156,7 @@
         <span><span class="dot d-trd"></span>Trend</span>
       </div>
       <div class="hrow">
-        <span class="tz">All times are EST (New York time). Open trades close at <b>4:30 PM EST</b>.</span>
+        <span class="tz"><b>All times are EST</b> (New York time).</span>
         <button class="toggle" id="themeBtn" type="button" aria-pressed="false">Light mode</button>
       </div>
     </div>
@@ -175,8 +164,8 @@
 
   <div class="defs">
     <div class="l-sqz"><h4 class="c-sqz">SQUEEZE</h4><p>Identifies tight consolidation periods where price is coiling. Enters on the directional breakout when energy releases.</p></div>
-    <div class="l-orb"><h4 class="c-orb">ORB (OPENING RANGE BREAKOUT)</h4><p>An opening window sets the high/low range (OGX 9:35 to 9:55 AM, RBO 9:10 to 10:00 AM). Trade fires when price breaks out above or below the range.</p></div>
-    <div class="l-trd"><h4 class="c-trd">TREND</h4><p>Catches sustained upside moves from late morning into the afternoon when momentum turns bullish. Long only, infrequent.</p></div>
+    <div class="l-orb"><h4 class="c-orb">ORB (OPENING RANGE BREAKOUT)</h4><p>An opening window sets the high/low range. Trade fires when price breaks out above or below the range.</p></div>
+    <div class="l-trd"><h4 class="c-trd">TREND</h4><p>Catches sustained upside moves when momentum turns bullish. Long only.</p></div>
   </div>
 
   <div class="grid">
@@ -185,35 +174,25 @@
     <div class="panel">
       <div class="ptitle"><span class="dot d-sqz"></span>SQUEEZE ALGOS</div>
       <div class="stack">
-
       <div class="card sqz">
         <div class="crow"><span class="cname">B2X</span><span class="badge b-sqz">Squeeze</span>
-          <div class="chips"><span class="chip i">M2K</span><span class="chip">10 min</span><span class="chip">L &amp; S</span></div></div>
-        <div class="cdesc">Squeeze on Micro Russell with 3 scaled take profits.</div>
-        <div class="exits"><span><em>TAKE PROFITS</em>125 / 150 / 200 ticks</span><span><em>STOP LOSS</em>100 ticks</span><span><em>TRAIL</em>fires at 126 ticks, moves 70</span></div>
-        <div class="sched"><div class="sess"><span>SESSION</span>10:00 AM to 11:50 AM</div>
-          <div class="days"><i class="off">MON</i><i>TUE</i><i>WED</i><i>THU</i><i>FRI</i></div></div>
-        <ul class="rules"><li>No new longs after 10:20 AM</li><li>No new shorts after 11:20 AM</li><li>Max 2 entries a day</li></ul>
+          <div class="chips"><span class="chip i">Micro Russell (M2K)</span><span class="chip">Long &amp; Short</span></div></div>
+        <div class="cdesc">Squeeze after a strong push. Takes profit at three levels so the last contracts can run.</div>
+        <dl class="logic"><div><dt>ENTRY</dt><dd>Waits for a strong move one way, then for the other side to try to take control and fail. Enters with the original push on a candle close once its proprietary confluences confirm.</dd></div><div><dt>EXITS</dt><dd>3 profit targets, fixed stop, trailing stop on the remaining contracts.</dd></div><div><dt>SIZING</dt><dd>Same size every trade. Edge Leverage off.</dd></div></dl>
       </div>
 
       <div class="card sqz">
         <div class="crow"><span class="cname">URGO</span><span class="badge b-sqz">Squeeze</span>
-          <div class="chips"><span class="chip i">MNQ</span><span class="chip">15 min</span><span class="chip">L &amp; S</span></div></div>
-        <div class="cdesc">Squeeze on Micro NASDAQ, wider 15-min bars. Bigger moves, smaller size than B2X.</div>
-        <div class="exits"><span><em>TAKE PROFITS</em>400 / 450 / 500 ticks</span><span><em>STOP LOSS</em>300 ticks</span><span><em>TRAIL</em>at 300</span></div>
-        <div class="sched"><div class="sess"><span>SESSION</span>9:30 AM to 2:00 PM</div>
-          <div class="days"><i>MON</i><i>TUE</i><i>WED</i><i>THU</i><i>FRI</i></div></div>
-        <ul class="rules"><li>Skips 11:30 AM to 12:00 PM</li><li>No shorts 12:00 to 1:00 PM</li><li>Max 1 entry a day</li></ul>
+          <div class="chips"><span class="chip i">Micro Nasdaq (MNQ)</span><span class="chip">Long &amp; Short</span></div></div>
+        <div class="cdesc">Squeeze on Micro NASDAQ. Bigger moves, smaller size than B2X.</div>
+        <dl class="logic"><div><dt>ENTRY</dt><dd>Waits for price to stall in a tight range without picking a direction, then enters on a candle close once its proprietary confluences confirm a direction. The close does not need to break the range.</dd></div><div><dt>EXITS</dt><dd>Profit targets, fixed stop, trailing stop.</dd></div><div><dt>SIZING</dt><dd>Same size every trade. Edge Leverage off.</dd></div></dl>
       </div>
 
       <div class="card sqz">
         <div class="crow"><span class="cname">G4M</span><span class="badge b-sqz">Squeeze</span>
-          <div class="chips"><span class="chip i">MES</span><span class="chip">15 min</span><span class="chip">L &amp; S</span></div></div>
-        <div class="cdesc">Coils on Micro S&amp;P 500 15-min bars and enters on the directional breakout when energy releases.</div>
-        <div class="exits"><span><em>TAKE PROFITS</em>80 / 120 / 160 ticks</span><span><em>STOP LOSS</em>80 ticks</span></div>
-        <div class="sched"><div class="sess"><span>SESSION</span>9:35 AM to 1:30 PM</div>
-          <div class="days"><i class="off">MON</i><i>TUE</i><i class="off">WED</i><i>THU</i><i>FRI</i></div></div>
-        <ul class="rules"><li>No new longs 10:30 to 11:00 AM</li><li>No new shorts 11:00 to 11:30 AM</li><li>No daily entry cap</li></ul>
+          <div class="chips"><span class="chip i">Micro S&amp;P 500 (MES)</span><span class="chip">Long &amp; Short</span></div></div>
+        <div class="cdesc">Squeeze on Micro S&amp;P 500. Does not use an opening range.</div>
+        <dl class="logic"><div><dt>ENTRY</dt><dd>Waits for price to coil, then enters on a candle close that its proprietary confluences confirm as the move out of the squeeze.</dd></div><div><dt>EXITS</dt><dd>3 profit targets, fixed stop, trailing stop on what is left.</dd></div><div><dt>SIZING</dt><dd>Same size every trade. Edge Leverage off.</dd></div></dl>
       </div>
       </div>
     </div>
@@ -222,36 +201,32 @@
     <div class="col">
       <div class="panel">
         <div class="ptitle"><span class="dot d-orb"></span>OPENING RANGE BREAKOUT ALGOS</div>
+        <div class="stack">
+      <div class="card orb">
+        <div class="crow"><span class="cname">OGX</span><span class="badge b-orb">ORB</span>
+          <div class="chips"><span class="chip i">Micro Nasdaq (MNQ)</span><span class="chip">Long &amp; Short</span></div></div>
+        <div class="cdesc">Core ORB on Micro NASDAQ. Range 9:35 to 9:55 AM. Most actively traded algo in the suite.</div>
+        <dl class="logic"><div><dt>ENTRY</dt><dd>Enters the moment price moves through either side of the range. It does not wait for a candle close.</dd></div><div><dt>EXITS</dt><dd>Profit targets, fixed stop, trailing stop.</dd></div><div><dt>SIZING</dt><dd>Edge Leverage on: the next trade after a stop out that day uses more contracts.</dd></div></dl>
+      </div>
 
-        <div class="card orb">
-          <div class="crow"><span class="cname">OGX</span><span class="badge b-orb">ORB</span>
-            <div class="chips"><span class="chip i">MNQ</span><span class="chip">5 min</span><span class="chip">L &amp; S</span></div></div>
-          <div class="cdesc">Core ORB on Micro NASDAQ. Range 9:35 to 9:55 AM. Most actively traded algo in the suite.</div>
-          <div class="sched"><div class="sess"><span>SESSION</span>9:35 AM to 1:50 PM</div>
-            <div class="days"><i class="off">MON</i><i>TUE</i><i>WED</i><i>THU</i><i>FRI</i></div></div>
-          <ul class="rules"><li>No shorts 12:00 to 1:00 PM</li><li>Max 3 entries a day</li><li>Edge Leverage on</li><li>No re-entry</li></ul>
-        </div>
-
-        <div class="card orb">
-          <div class="crow"><span class="cname">RBO</span><span class="badge b-orb">ORB</span>
-            <div class="chips"><span class="chip i">M2K</span><span class="chip">10 min</span><span class="chip">L &amp; S</span></div></div>
-          <div class="cdesc">ORB on Micro Russell 2000. Small-cap, tends to diverge from NQ/ES in choppy markets.</div>
-          <div class="sched"><div class="sess"><span>SESSION</span>9:35 AM to 11:00 AM</div>
-            <div class="days"><i>MON</i><i>TUE</i><i>WED</i><i>THU</i><i>FRI</i></div></div>
-          <ul class="rules"><li>No new shorts after 10:25 AM</li><li>Max 2 entries a day</li><li>No Edge Leverage</li><li>No re-entry</li></ul>
+      <div class="card orb">
+        <div class="crow"><span class="cname">RBO</span><span class="badge b-orb">ORB</span>
+          <div class="chips"><span class="chip i">Micro Russell (M2K)</span><span class="chip">Long &amp; Short</span></div></div>
+        <div class="cdesc">ORB on Micro Russell 2000. Range 9:10 to 10:00 AM. Small-cap, tends to diverge from NQ/ES in choppy markets.</div>
+        <dl class="logic"><div><dt>ENTRY</dt><dd>Trades a break of the range, long or short.</dd></div><div><dt>EXITS</dt><dd>3 profit targets, fixed stop. The stop moves into profit after a gain, then a trailing stop takes over.</dd></div><div><dt>SIZING</dt><dd>Same size every trade. Edge Leverage off.</dd></div></dl>
+      </div>
         </div>
       </div>
 
       <div class="panel">
         <div class="ptitle"><span class="dot d-trd"></span>TREND ALGO</div>
-        <div class="card trd">
-          <div class="crow"><span class="cname">MST2</span><span class="badge b-trd">Trend</span>
-            <div class="chips"><span class="chip i">YM</span><span class="chip">10 min</span><span class="chip">Long only</span></div></div>
-          <div class="cdesc">Trend on the Dow (MotusTemplar), full size YM at every account size. Buys sustained moves from late morning into the afternoon when momentum turns bullish. Fires only a few days a week.</div>
-          <div class="exits"><span><em>TAKE PROFITS</em>85 / 120 / 130 ticks</span><span><em>STOP LOSS</em>65 ticks</span></div>
-          <div class="sched"><div class="sess"><span>SESSION</span>11:00 AM to 2:30 PM</div>
-            <div class="days"><i>MON</i><i class="off">TUE</i><i>WED</i><i class="off">THU</i><i>FRI</i></div></div>
-          <ul class="rules"><li>Skips 1:00 to 2:00 PM</li><li>Re-entry on, after 4 bars</li></ul>
+        <div class="stack">
+      <div class="card trd">
+        <div class="crow"><span class="cname">MST2</span><span class="badge b-trd">Trend</span>
+          <div class="chips"><span class="chip i">Dow (YM)</span><span class="chip">Long only</span></div></div>
+        <div class="cdesc">Trend on the Dow (MotusTemplar), full size YM at every account size. Buys sustained moves when momentum turns bullish.</div>
+        <dl class="logic"><div><dt>ENTRY</dt><dd>Waits for a dip or a pause in an uptrend to run out of steam, then buys at the close of the candle where its proprietary confluences confirm the uptrend is resuming.</dd></div><div><dt>EXITS</dt><dd>Profit taking, fixed stop, trailing stop.</dd></div><div><dt>SIZING</dt><dd>Same size every trade. Edge Leverage off.</dd></div></dl>
+      </div>
         </div>
       </div>
     </div>
@@ -259,9 +234,9 @@
   </div>
 
   <div class="foot">
-    <div><div class="fbar" style="background:var(--orb)"></div><h5>TIMES AND DAILY CLOSE</h5><p><b>All times are EST (New York time).</b> Open trades close at 4:30 PM EST. Highlighted day = the algo trades that day; dimmed day = no session.</p></div>
-    <div><div class="fbar" style="background:var(--sqz)"></div><h5>BLOCKED DAYS</h5><p>FOMC statement days, holidays and shortened sessions are blocked by default.</p></div>
-    <div><div class="fbar" style="background:var(--trd)"></div><h5>CHOP WARNING</h5><p>ORB algos perform best on clean directional opens. False breakouts in choppy sessions are the algo following its rules - not a malfunction.</p></div>
+    <div><div class="fbar" style="background:var(--sqz)"></div><h5>SCHEDULES</h5><p>Sessions, trading days and daily entry limits for every algo are on the <b>Algo Cheat Sheet</b>.</p></div>
+    <div><div class="fbar" style="background:var(--orb)"></div><h5>STOPS AND TARGETS</h5><p>Exact stops, targets and example trades for every algo are in <b>Inside the Trades</b>.</p></div>
+    <div><div class="fbar" style="background:var(--trd)"></div><h5>CHOP WARNING</h5><p>ORB algos perform best on clean directional opens. False breakouts in choppy sessions are the algo following its rules, not a malfunction.</p></div>
     <div><div class="fbar" style="background:var(--amber)"></div><h5>CONTRACT ROLLOVER</h5><p>Roll contracts every 3-4 days via Tools &gt; Database Management. Stale contracts = no trades. Restart NT to trigger the rollover prompt.</p></div>
   </div>
 
